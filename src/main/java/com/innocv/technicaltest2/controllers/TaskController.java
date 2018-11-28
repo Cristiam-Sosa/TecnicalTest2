@@ -12,7 +12,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@RequestMapping("/users/{userId}")
+@RequestMapping("/users/{userId}/tasks")
 @Api(description = "Manage task")
 public class TaskController {
 
