@@ -10,18 +10,30 @@ import org.springframework.boot.test.web.client.TestRestTemplate;
 import org.springframework.context.annotation.Profile;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.context.junit4.SpringRunner;
+
+import java.util.Objects;
 
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.core.Is.is;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest(classes = TechnicalTest2Application.class, webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
-@Profile("test")
+@ActiveProfiles("test")
 public class TaskFunctionalTest {
 
     @Autowired
     private TestRestTemplate restTemplate;
+
+	@Test
+	public void withRequestTasksOfUser2_shouldReturn3Tasks () {
+		//TODO: Fix test
+
+		ResponseEntity<Task[]> tasks = restTemplate.getForEntity("/user/2/task", Task[].class);
+
+		assertThat(Objects.requireNonNull(tasks.getBody()).length, is(3));
+	}
 
     @Test
     public void withSecurityDataOfUser1AndRequestTaskOfUser2_shouldReturn401 () {
